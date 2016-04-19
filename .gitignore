@@ -1,0 +1,11 @@
+node_modules
+.tmp
+.idea
+/src/config/local.env.js
+.DS_Store
+build/
+
+#vim
+*.swp
+*.swo
+.environment
