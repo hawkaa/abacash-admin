@@ -1,17 +1,21 @@
 /* eslint-disable no-var, prefer-arrow-callback, consistent-return, prefer-template */
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
     context: path.join(__dirname + '/src'),
-    entry: './app.js',
+    entry: [
+        'webpack-dev-server/client?http://localhost:8080',
+        'webpack/hot/only-dev-server',
+        './app.js',
+    ],
     output: {
         path: path.join(__dirname + '/build'),
         filename: 'bundle.js'
     },
     devServer: {
-        outputPath: path.join(__dirname, '/build'),
-        hot: true
+        outputPath: path.join(__dirname, '/build')
     },
     module: {
         loaders: [
@@ -33,6 +37,8 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin([
             { from: 'index.html' }
-        ])
+        ]),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
     ]
 };
